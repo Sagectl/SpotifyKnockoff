@@ -19,21 +19,21 @@ import javax.swing.table.DefaultTableModel;
  * @version 1.1
  */
 public class DbUtilities {
-	
+	/*
 	private Connection conn = null; // connection object
 	private String hostName = "sis-teach-01.sis.pitt.edu";
 	private String dbName = "spotify_knockoff";
 	private String dbUserName = "spotifyUser";
 	private String dbPassword = "spotifyUser123" ;
-	
+	*/
     
-	/*
+	
     private Connection conn = null; // connection object
     private String hostName = "127.0.0.1:3306"; // server address + port number
     private String dbName = "spotify_knockoff"; // default database name
     private String dbUserName = "root"; // login name for the database server
     private String dbPassword = "mysql123"; // password for the database server
-    */
+    
 	
 	
     /**
@@ -201,6 +201,10 @@ public class DbUtilities {
 			data.add(vector);
 		}
 		return new DefaultTableModel(data, columnNames);
+	}
+
+	public Connection getConn() {
+		return conn;
 	}
     
 }

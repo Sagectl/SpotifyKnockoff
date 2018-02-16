@@ -1,5 +1,7 @@
 package spotifyKnockoff;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -26,6 +28,7 @@ public class Album {
 		this.length = length;
 		this.albumID = UUID.randomUUID().toString();
 		
+		/*
 		String sql = "INSERT INTO `album`(`album_id`,`title`,`release_date`,`cover_image_path`,`recording_company_name`,`number_of_tracks`,`PMRC_rating`,`length`) ";
 		       sql +=  "VALUES ('" + this.albumID + "','" + this.title + "','" + this.releaseDate + "','" + this.coverImagePath + "','" +this.recordingCompany + "','" + this.numberOfTracks + "','" + this.pmrcRating +"','" + this.length + "');";
 		       
@@ -33,8 +36,37 @@ public class Album {
 		
 		DbUtilities db = new DbUtilities();
 		db.executeQuery(sql);
+		*/
 		
+
+		String sql = "INSERT INTO `album`(`album_id`,`title`,`release_date`,`cover_image_path`,`recording_company_name`,`number_of_tracks`,`PMRC_rating`,`length`) " ;
+			   sql +=  "VALUES (?,?,?,?,?,?,?,?) ;" ;
+			   		
+	    //System.out.println(sql);
+		
+	    try {
+		    DbUtilities db = new DbUtilities();
+		    Connection conn = db.getConn();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, this.albumID);
+			ps.setString(2, this.title);
+			ps.setString(3, this.releaseDate);
+			ps.setString(4, this.coverImagePath);
+			ps.setString(5, this.recordingCompany);
+			ps.setInt(6, this.numberOfTracks);
+			ps.setString(7, this.pmrcRating);
+			ps.setDouble(8, this.length);
+			ps.executeUpdate();
+			
+			System.out.print(ps);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
 	}
+		
+
 	
 	public Album(String albumID){
 		String sql = "SELECT * FROM album WHERE album_id = '" + albumID + "';" ;
