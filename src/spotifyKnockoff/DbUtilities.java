@@ -29,7 +29,7 @@ public class DbUtilities {
     
 	
     private Connection conn = null; // connection object
-    private String hostName = "127.0.0.1:3306"; // server address + port number
+    private String hostName = "127.0.0.1:3306"; // server address + port number 
     private String dbName = "spotify_knockoff"; // default database name
     private String dbUserName = "root"; // login name for the database server
     private String dbPassword = "mysql123"; // password for the database server
@@ -104,17 +104,17 @@ public class DbUtilities {
      * @throws SQLException
      */
     public ResultSet getResultSet(String sql) throws SQLException {  
-        try {
+        //try {
             if(conn == null){ // Check if connection object already exists
                 createDbConnection(); // If does not exist, create new connection
             }
             Statement statement = conn.createStatement();
             return statement.executeQuery(sql); // Return ResultSet
-        } catch (Exception e) {
-        	e.printStackTrace(); // debug
-            
-        }
-        return null;
+        //} catch (SQLException e) {
+        	//e.printStackTrace(); // debug
+        	
+        //}
+        //return null;
     }
     
     /**
@@ -145,11 +145,13 @@ public class DbUtilities {
      * @throws SQLException
      */
     public DefaultTableModel getDataTable(String sql) throws SQLException{
+    	
     	ResultSet rs = getResultSet(sql);
     	
     	/* Metadata object contains additional information about a ResulSet, 
     	 * such as database column names, data types, etc...
     	 */
+    	
 		ResultSetMetaData metaData = rs.getMetaData();
 		
 		// Get column names from the metadata object and store them in a Vector variable
@@ -183,7 +185,9 @@ public class DbUtilities {
     	/* Metadata object contains additional information about a ResulSet, 
     	 * such as database column names, data types, etc...
     	 */
+    	
     	ResultSetMetaData metaData = rs.getMetaData();
+    		
     	
     	// Get column names from the metadata object and store them in a Vector variable
 		Vector<String> columnNames = new Vector<String>();
